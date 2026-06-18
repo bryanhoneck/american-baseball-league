@@ -1,0 +1,251 @@
+const ABL = {
+  divisions: {
+    major: {
+      name: "Major Division",
+      regions: {
+        "West Coast": [
+          { city: "Los Angeles",   name: "Dodgers",      abbr: "LAD", w: 98, l: 64 },
+          { city: "San Diego",     name: "Padres",       abbr: "SD",  w: 93, l: 69 },
+          { city: "Seattle",       name: "Mariners",     abbr: "SEA", w: 85, l: 77 },
+          { city: "San Francisco", name: "Giants",       abbr: "SF",  w: 80, l: 82 },
+          { city: "Oakland",       name: "Athletics",    abbr: "OAK", w: 69, l: 93 },
+          { city: "Los Angeles",   name: "Angels",       abbr: "LAA", w: 63, l: 99 },
+        ],
+        "I-95": [
+          { city: "Philadelphia",  name: "Phillies",     abbr: "PHI", w: 95, l: 67 },
+          { city: "New York",      name: "Yankees",      abbr: "NYY", w: 94, l: 68 },
+          { city: "Baltimore",     name: "Orioles",      abbr: "BAL", w: 91, l: 71 },
+          { city: "New York",      name: "Mets",         abbr: "NYM", w: 89, l: 73 },
+          { city: "Boston",        name: "Red Sox",      abbr: "BOS", w: 81, l: 81 },
+          { city: "Washington",    name: "Nationals",    abbr: "WSH", w: 71, l: 91 },
+        ],
+        "I-70": [
+          { city: "Milwaukee",     name: "Brewers",      abbr: "MIL", w: 93, l: 69 },
+          { city: "Chicago",       name: "Cubs",         abbr: "CHC", w: 83, l: 79 },
+          { city: "St. Louis",     name: "Cardinals",    abbr: "STL", w: 83, l: 79 },
+          { city: "Cincinnati",    name: "Reds",         abbr: "CIN", w: 77, l: 85 },
+          { city: "Pittsburgh",    name: "Pirates",      abbr: "PIT", w: 76, l: 86 },
+          { city: "Denver",        name: "Rockies",      abbr: "COL", w: 61, l: 101 },
+        ],
+        "North": [
+          { city: "Cleveland",     name: "Guardians",    abbr: "CLE", w: 92, l: 69 },
+          { city: "Detroit",       name: "Tigers",       abbr: "DET", w: 86, l: 76 },
+          { city: "Kansas City",   name: "Royals",       abbr: "KC",  w: 86, l: 76 },
+          { city: "Minnesota",     name: "Twins",        abbr: "MIN", w: 82, l: 80 },
+          { city: "Toronto",       name: "Blue Jays",    abbr: "TOR", w: 74, l: 88 },
+          { city: "Chicago",       name: "White Sox",    abbr: "CWS", w: 41, l: 121 },
+        ],
+        "South": [
+          { city: "Atlanta",       name: "Braves",       abbr: "ATL", w: 89, l: 73 },
+          { city: "Arizona",       name: "Diamondbacks", abbr: "ARI", w: 89, l: 73 },
+          { city: "Houston",       name: "Astros",       abbr: "HOU", w: 88, l: 74 },
+          { city: "Memphis",       name: "Rays",         abbr: "MEM", w: 80, l: 82 },
+          { city: "Texas",         name: "Rangers",      abbr: "TEX", w: 78, l: 84 },
+          { city: "Miami",         name: "Marlins",      abbr: "MIA", w: 62, l: 100 },
+        ],
+      }
+    },
+    supplemental: {
+      name: "Supplemental Division",
+      regions: {
+        "West Coast": [
+          { city: "Reno",          name: "Aces",         abbr: "RNO", w: 81, l: 69 },
+          { city: "Tacoma",        name: "Rainiers",     abbr: "TAC", w: 78, l: 72 },
+          { city: "Sacramento",    name: "River Cats",   abbr: "SAC", w: 75, l: 75 },
+          { city: "Las Vegas",     name: "Aviators",     abbr: "LV",  w: 66, l: 84 },
+          { city: "Salt Lake",     name: "Bees",         abbr: "SLC", w: 62, l: 88 },
+          { city: "Albuquerque",   name: "Isotopes",     abbr: "ABQ", w: 57, l: 93 },
+        ],
+        "I-95": [
+          { city: "Lehigh Valley", name: "IronPigs",     abbr: "LHV", w: 88, l: 62 },
+          { city: "Scranton/WB",   name: "RailRiders",   abbr: "SWB", w: 86, l: 64 },
+          { city: "Norfolk",       name: "Tides",        abbr: "NOR", w: 83, l: 67 },
+          { city: "Syracuse",      name: "Mets",         abbr: "SYR", w: 81, l: 69 },
+          { city: "Worcester",     name: "Red Sox",      abbr: "WOR", w: 73, l: 77 },
+          { city: "Rochester",     name: "Red Wings",    abbr: "ROC", w: 66, l: 84 },
+        ],
+        "I-70": [
+          { city: "Oklahoma City", name: "Baseball Club",abbr: "OKC", w: 91, l: 59 },
+          { city: "Nashville",     name: "Sounds",       abbr: "NAS", w: 85, l: 65 },
+          { city: "Omaha",         name: "Storm Chasers",abbr: "OMA", w: 79, l: 71 },
+          { city: "Tampa",         name: "Redbirds",     abbr: "TBR", w: 76, l: 74 },
+          { city: "Louisville",    name: "Bats",         abbr: "LOU", w: 72, l: 78 },
+          { city: "Charlotte",     name: "Knights",      abbr: "CLT", w: 51, l: 99 },
+        ],
+        "North": [
+          { city: "Columbus",      name: "Clippers",     abbr: "CLB", w: 84, l: 66 },
+          { city: "Toledo",        name: "Mud Hens",     abbr: "TOL", w: 80, l: 70 },
+          { city: "St. Paul",      name: "Saints",       abbr: "STP", w: 77, l: 73 },
+          { city: "Iowa",          name: "Cubs",         abbr: "IOW", w: 76, l: 74 },
+          { city: "Buffalo",       name: "Bisons",       abbr: "BUF", w: 71, l: 79 },
+          { city: "Indianapolis",  name: "Indians",      abbr: "IND", w: 69, l: 81 },
+        ],
+        "South": [
+          { city: "El Paso",       name: "Chihuahuas",   abbr: "ELP", w: 84, l: 66 },
+          { city: "Gwinnett",      name: "Stripers",     abbr: "GWN", w: 82, l: 68 },
+          { city: "Sugar Land",    name: "Space Cowboys",abbr: "SL",  w: 81, l: 69 },
+          { city: "Durham",        name: "Bulls",        abbr: "DUR", w: 75, l: 75 },
+          { city: "Round Rock",    name: "Express",      abbr: "RR",  w: 73, l: 77 },
+          { city: "Jacksonville",  name: "Jumbo Shrimp", abbr: "JAX", w: 59, l: 91 },
+        ],
+      }
+    },
+    minors1: {
+      name: "Minors 1 Division",
+      regions: {
+        "West Coast": [
+          { city: "Tulsa",        name: "Drillers",       abbr: "TUL", w: 82, l: 56 },
+          { city: "Amarillo",     name: "Sod Poodles",    abbr: "AMA", w: 76, l: 62 },
+          { city: "San Antonio",  name: "Missions",       abbr: "SA",  w: 74, l: 64 },
+          { city: "NW Arkansas",  name: "Naturals",       abbr: "NWA", w: 71, l: 67 },
+          { city: "Arkansas",     name: "Travelers",      abbr: "ARK", w: 68, l: 70 },
+          { city: "Midland",      name: "RockHounds",     abbr: "MID", w: 55, l: 83 },
+        ],
+        "I-95": [
+          { city: "Somerset",     name: "Patriots",       abbr: "SOM", w: 81, l: 57 },
+          { city: "Reading",      name: "Fightin Phils",  abbr: "REA", w: 79, l: 59 },
+          { city: "Bowie",        name: "Baysox",         abbr: "BOW", w: 76, l: 62 },
+          { city: "Hartford",     name: "Yard Goats",     abbr: "HFD", w: 72, l: 66 },
+          { city: "Portland",     name: "Sea Dogs",       abbr: "POR", w: 69, l: 69 },
+          { city: "New Hampshire",name: "Fisher Cats",    abbr: "NH",  w: 65, l: 73 },
+        ],
+        "I-70": [
+          { city: "Tennessee",    name: "Smokies",        abbr: "TNS", w: 77, l: 61 },
+          { city: "Wichita",      name: "Wind Surge",     abbr: "WCH", w: 73, l: 65 },
+          { city: "Springfield",  name: "Cardinals",      abbr: "SPC", w: 72, l: 66 },
+          { city: "Montgomery",   name: "Biscuits",       abbr: "MTG", w: 71, l: 67 },
+          { city: "Chattanooga",  name: "Lookouts",       abbr: "CHA", w: 63, l: 75 },
+          { city: "Rocket City",  name: "Trash Pandas",   abbr: "RCT", w: 58, l: 80 },
+        ],
+        "North": [
+          { city: "Akron",        name: "RubberDucks",    abbr: "AKR", w: 78, l: 60 },
+          { city: "Binghamton",   name: "Rumble Ponies",  abbr: "BNG", w: 73, l: 65 },
+          { city: "Erie",         name: "SeaWolves",      abbr: "ERI", w: 74, l: 64 },
+          { city: "Richmond",     name: "Flying Squirrels",abbr:"RIC", w: 70, l: 68 },
+          { city: "Harrisburg",   name: "Senators",       abbr: "HAR", w: 64, l: 74 },
+          { city: "Altoona",      name: "Curve",          abbr: "ALT", w: 62, l: 76 },
+        ],
+        "South": [
+          { city: "Mississippi",  name: "Braves",         abbr: "MIS", w: 76, l: 62 },
+          { city: "Biloxi",       name: "Shuckers",       abbr: "BLX", w: 78, l: 60 },
+          { city: "Frisco",       name: "RoughRiders",    abbr: "FRI", w: 75, l: 63 },
+          { city: "Corpus Christi",name:"Hooks",          abbr: "CC",  w: 74, l: 64 },
+          { city: "Pensacola",    name: "Blue Wahoos",    abbr: "PNS", w: 55, l: 83 },
+          { city: "Birmingham",   name: "Barons",         abbr: "BHM", w: 46, l: 92 },
+        ],
+      }
+    },
+    minors2: {
+      name: "Minors 2 Division",
+      regions: {
+        "West Coast": [
+          { city: "Hillsboro",    name: "Hops",           abbr: "HBG", w: 76, l: 56 },
+          { city: "Everett",      name: "AquaSox",        abbr: "EVE", w: 73, l: 59 },
+          { city: "Vancouver",    name: "Canadians",      abbr: "VAN", w: 72, l: 60 },
+          { city: "Eugene",       name: "Emeralds",       abbr: "EUG", w: 68, l: 64 },
+          { city: "Spokane",      name: "Indians",        abbr: "SPO", w: 56, l: 76 },
+          { city: "Tri-City",     name: "Dust Devils",    abbr: "TCY", w: 55, l: 77 },
+        ],
+        "I-95": [
+          { city: "Jersey Shore", name: "BlueClaws",      abbr: "JSH", w: 80, l: 52 },
+          { city: "Hudson Valley",name: "Renegades",      abbr: "HV",  w: 78, l: 54 },
+          { city: "Brooklyn",     name: "Cyclones",       abbr: "BRK", w: 72, l: 60 },
+          { city: "Aberdeen",     name: "IronBirds",      abbr: "ABD", w: 74, l: 58 },
+          { city: "Greenville",   name: "Drive",          abbr: "GVL", w: 67, l: 65 },
+          { city: "Wilmington",   name: "Blue Rocks",     abbr: "WIL", w: 64, l: 68 },
+        ],
+        "I-70": [
+          { city: "Wisconsin",    name: "Timber Rattlers",abbr: "WIS", w: 77, l: 55 },
+          { city: "Quad Cities",  name: "River Bandits",  abbr: "QC",  w: 72, l: 60 },
+          { city: "Peoria",       name: "Chiefs",         abbr: "PEO", w: 70, l: 62 },
+          { city: "South Bend",   name: "Cubs",           abbr: "SBN", w: 69, l: 63 },
+          { city: "Cedar Rapids", name: "Kernels",        abbr: "CDR", w: 68, l: 64 },
+          { city: "Beloit",       name: "Sky Carp",       abbr: "BEL", w: 53, l: 79 },
+        ],
+        "North": [
+          { city: "Great Lakes",  name: "Loons",          abbr: "GL",  w: 80, l: 52 },
+          { city: "Lake County",  name: "Captains",       abbr: "LC",  w: 76, l: 56 },
+          { city: "Fort Wayne",   name: "TinCaps",        abbr: "FW",  w: 74, l: 58 },
+          { city: "West Michigan",name: "Whitecaps",      abbr: "WMI", w: 73, l: 59 },
+          { city: "Dayton",       name: "Dragons",        abbr: "DAY", w: 66, l: 66 },
+          { city: "Lansing",      name: "Lugnuts",        abbr: "LAN", w: 58, l: 74 },
+        ],
+        "South": [
+          { city: "Rome",         name: "Braves",         abbr: "ROM", w: 76, l: 56 },
+          { city: "Asheville",    name: "Tourists",       abbr: "ASH", w: 74, l: 58 },
+          { city: "Bowling Green",name: "Hot Rods",       abbr: "BG",  w: 71, l: 61 },
+          { city: "Hickory",      name: "Crawdads",       abbr: "HIC", w: 68, l: 64 },
+          { city: "Greensboro",   name: "Grasshoppers",   abbr: "GBO", w: 63, l: 69 },
+          { city: "Winston-Salem",name: "Dash",           abbr: "WS",  w: 43, l: 89 },
+        ],
+      }
+    }
+  }
+};
+
+// Reserve League — 50 teams eligible for promotion into Minors 2
+// W/L placeholders are overwritten by season.js at runtime
+const ABL_RESERVE = {
+  regions: {
+    "West": [
+      { city: "San Jose",       name: "Steelheads",     abbr: "SJS", w: 27, l: 27 },
+      { city: "Fresno",         name: "Foxes",          abbr: "FRE", w: 27, l: 27 },
+      { city: "Long Beach",     name: "Breakers",       abbr: "LBC", w: 27, l: 27 },
+      { city: "Bakersfield",    name: "Oilmen",         abbr: "BKF", w: 27, l: 27 },
+      { city: "Stockton",       name: "Mudcats",        abbr: "STK", w: 27, l: 27 },
+      { city: "Tucson",         name: "Saguaros",       abbr: "TUS", w: 27, l: 27 },
+      { city: "Mesa",           name: "Meteors",        abbr: "MSA", w: 27, l: 27 },
+      { city: "Boise",          name: "Stampede",       abbr: "BOI", w: 27, l: 27 },
+      { city: "Henderson",      name: "Vipers",         abbr: "HND", w: 27, l: 27 },
+      { city: "Portland",       name: "Lumberjacks",    abbr: "PDX", w: 27, l: 27 },
+    ],
+    "South": [
+      { city: "Tampa",          name: "Stingrays",      abbr: "TPA", w: 27, l: 27 },
+      { city: "Orlando",        name: "Flamingos",      abbr: "ORL", w: 27, l: 27 },
+      { city: "St. Petersburg", name: "Sunfish",        abbr: "SPB", w: 27, l: 27 },
+      { city: "Fort Lauderdale",name: "Hammerheads",    abbr: "FTL", w: 27, l: 27 },
+      { city: "Tallahassee",    name: "Capitals",       abbr: "TLH", w: 27, l: 27 },
+      { city: "Raleigh",        name: "Oaks",           abbr: "RAL", w: 27, l: 27 },
+      { city: "Virginia Beach", name: "Bluefish",       abbr: "VIR", w: 27, l: 27 },
+      { city: "Augusta",        name: "Ironhounds",     abbr: "AGS", w: 27, l: 27 },
+      { city: "Savannah",       name: "Sand Gnats",     abbr: "SAV", w: 27, l: 27 },
+      { city: "Mobile",         name: "Manatees",       abbr: "MOB", w: 27, l: 27 },
+    ],
+    "Central": [
+      { city: "Austin",         name: "Lone Stars",     abbr: "AUT", w: 27, l: 27 },
+      { city: "Laredo",         name: "Outlaws",        abbr: "LRD", w: 27, l: 27 },
+      { city: "Lubbock",        name: "Cotton Kings",   abbr: "LBB", w: 27, l: 27 },
+      { city: "Plano",          name: "Stallions",      abbr: "PLA", w: 27, l: 27 },
+      { city: "New Orleans",    name: "Mudbugs",        abbr: "NOL", w: 27, l: 27 },
+      { city: "Baton Rouge",    name: "Rougarou",       abbr: "BTR", w: 27, l: 27 },
+      { city: "Shreveport",     name: "Gators",         abbr: "SHV", w: 27, l: 27 },
+      { city: "Lafayette",      name: "Crawfish",       abbr: "LAF", w: 27, l: 27 },
+      { city: "Colorado Springs",name: "Snowcats",      abbr: "COS", w: 27, l: 27 },
+      { city: "Jackson",        name: "Jaguars",        abbr: "JKS", w: 27, l: 27 },
+    ],
+    "Midwest": [
+      { city: "Grand Rapids",   name: "Rivers",         abbr: "GRR", w: 27, l: 27 },
+      { city: "Madison",        name: "Mallards",       abbr: "MAD", w: 27, l: 27 },
+      { city: "Des Moines",     name: "Demons",         abbr: "DSM", w: 27, l: 27 },
+      { city: "Sioux Falls",    name: "Storm",          abbr: "SFS", w: 27, l: 27 },
+      { city: "Fargo",          name: "Blizzard",       abbr: "FGO", w: 27, l: 27 },
+      { city: "Green Bay",      name: "Walleye",        abbr: "GBW", w: 27, l: 27 },
+      { city: "Knoxville",      name: "Thunder",        abbr: "KVL", w: 27, l: 27 },
+      { city: "Lincoln",        name: "Saltdogs",       abbr: "LNK", w: 27, l: 27 },
+      { city: "Evansville",     name: "Otters",         abbr: "EVS", w: 27, l: 27 },
+      { city: "Ann Arbor",      name: "Arrows",         abbr: "ANN", w: 27, l: 27 },
+    ],
+    "Northeast & Other": [
+      { city: "Lexington",      name: "Thoroughbreds",  abbr: "LEX", w: 27, l: 27 },
+      { city: "Scottsdale",     name: "Scorpions",      abbr: "SCO", w: 27, l: 27 },
+      { city: "Chandler",       name: "Coyotes",        abbr: "CHL", w: 27, l: 27 },
+      { city: "Albany",         name: "Patroons",       abbr: "ALB", w: 27, l: 27 },
+      { city: "Columbia",       name: "Fireflies",      abbr: "CLM", w: 27, l: 27 },
+      { city: "New Haven",      name: "Ravens",         abbr: "NHV", w: 27, l: 27 },
+      { city: "Honolulu",       name: "Islanders",      abbr: "HNL", w: 27, l: 27 },
+      { city: "Anchorage",      name: "Icebreakers",    abbr: "ANC", w: 27, l: 27 },
+      { city: "Provo",          name: "Peaks",          abbr: "PRV", w: 27, l: 27 },
+      { city: "Aurora",         name: "Raptors",        abbr: "AUR", w: 27, l: 27 },
+    ],
+  }
+};

@@ -1,0 +1,158 @@
+.cup-note {
+  background: #161b22;
+  border: 1px solid #21262d;
+  border-left: 3px solid #d29922;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: #8b949e;
+  margin-bottom: 20px;
+}
+.cup-note strong { color: #e6edf3; }
+
+/* Bracket layout */
+.bracket {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.bracket-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.col-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #58a6ff;
+  margin-bottom: 4px;
+}
+.col-sub {
+  font-weight: 400;
+  color: #8b949e;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.7rem;
+}
+
+/* Bracket card */
+.b-card {
+  background: #161b22;
+  border: 1px solid #21262d;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.b-card-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8b949e;
+  padding: 4px 8px;
+  background: #1f2937;
+  border-bottom: 1px solid #21262d;
+}
+
+.b-row {
+  display: grid;
+  grid-template-columns: 20px 28px 32px 1fr 40px 16px;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border-bottom: 1px solid #21262d;
+  font-size: 0.78rem;
+}
+.b-row:last-of-type { border-bottom: none; }
+
+.b-winner { background: #1a2332; }
+.b-loser  { opacity: 0.4; }
+
+.b-seed  { color: #8b949e; font-size: 0.68rem; text-align: right; }
+.b-abbr  { font-weight: 700; color: #f0f6fc; }
+.b-name  { color: #8b949e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.73rem; }
+.b-pct   { color: #58a6ff; font-weight: 600; text-align: right; font-size: 0.73rem; }
+.b-check { color: #3fb950; font-weight: 700; text-align: center; font-size: 0.72rem; }
+.div-badge { font-size: 0.62rem; font-weight: 700; text-align: center; }
+
+.b-score {
+  padding: 3px 8px;
+  font-size: 0.68rem;
+  color: #8b949e;
+  text-align: right;
+  background: #0d1117;
+}
+
+/* Final column extras */
+.bracket-final .b-card {
+  border-color: #d29922;
+  box-shadow: 0 0 10px rgba(210,153,34,0.15);
+}
+
+.champion-banner {
+  text-align: center;
+  padding: 18px 12px;
+  background: linear-gradient(135deg, #1a2332, #161b22);
+  border: 1px solid #d29922;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+.champ-trophy { font-size: 2rem; margin-bottom: 6px; }
+.champ-name   { font-size: 1.2rem; font-weight: 700; color: #f0f6fc; margin-bottom: 4px; }
+.champ-sub    { font-size: 0.78rem; color: #d29922; }
+
+/* SF alignment — vertically center between QF pairs */
+.bracket-sf {
+  padding-top: 48px;
+  gap: 68px;
+}
+.bracket-final {
+  padding-top: 96px;
+}
+
+/* Tab content wrapper */
+.champ-content { margin-top: 12px; }
+
+.champ-round-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #58a6ff;
+  margin-bottom: 12px;
+}
+.champ-round-sub {
+  font-weight: 400;
+  color: #8b949e;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.7rem;
+}
+
+.champ-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .bracket { flex-direction: column; }
+  .bracket-sf, .bracket-final { padding-top: 0; }
+  .bracket-sf { gap: 12px; }
+  .champ-cards { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .b-row {
+    grid-template-columns: 16px 24px 26px 1fr 34px 14px;
+    font-size: 0.72rem;
+    padding: 5px 6px;
+    gap: 3px;
+  }
+  .col-label { font-size: 0.7rem; }
+}
