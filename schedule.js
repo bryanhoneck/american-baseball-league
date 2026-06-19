@@ -94,17 +94,29 @@
     return Math.max(0.2, Math.min(0.8, 0.5 + (talentHome - talentAway) + homeAdj));
   }
 
-  function simRuns(rand, isWinner) {
-    const base = isWinner ? 5 : 3;
-    return Math.max(0, base + Math.floor(rand() * 5) - 1);
+  function simScores(rand) {
+    const flavor = rand();
+    let winnerRuns, loserRuns;
+    if (flavor < 0.08) {
+      // blowout — occasional 13-2, 11-1, etc.
+      winnerRuns = 9 + Math.floor(rand() * 6);       // 9-14
+      loserRuns  = Math.floor(rand() * 4);            // 0-3
+    } else if (flavor < 0.18) {
+      // high-scoring nailbiter — occasional 10-9, 11-9
+      winnerRuns = 7 + Math.floor(rand() * 6);        // 7-12
+      loserRuns  = winnerRuns - 1 - Math.floor(rand() * 2);
+    } else {
+      // typical game
+      winnerRuns = 4 + Math.floor(rand() * 5);        // 4-8
+      loserRuns  = Math.max(0, winnerRuns - 1 - Math.floor(rand() * 4));
+    }
+    return { winnerRuns, loserRuns: Math.max(0, loserRuns) };
   }
 
   function playGame(rand, home, away, talents, dateObj, type) {
     const prob = winProb(talents[home.abbr], talents[away.abbr], 0.03);
     const homeWin = rand() < prob;
-    let winnerRuns = simRuns(rand, true);
-    let loserRuns  = simRuns(rand, false);
-    if (loserRuns >= winnerRuns) loserRuns = Math.max(0, winnerRuns - 1 - Math.floor(rand() * 2));
+    const { winnerRuns, loserRuns } = simScores(rand);
     const homeScore = homeWin ? winnerRuns : loserRuns;
     const awayScore = homeWin ? loserRuns : winnerRuns;
     return {
