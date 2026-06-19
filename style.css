@@ -325,8 +325,16 @@ tbody td:first-child { text-align: left; }
 
   header svg { width: 120px; height: 120px; }
 
-  .page-nav { gap: 6px; }
-  .page-nav a { padding: 5px 12px; font-size: 0.85rem; }
+  .page-nav {
+    gap: 4px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+  }
+  .page-nav::-webkit-scrollbar { display: none; }
+  .page-nav a { padding: 5px 12px; font-size: 0.85rem; white-space: nowrap; flex-shrink: 0; }
 
   .tab-bar {
     overflow-x: auto;
@@ -1284,4 +1292,16 @@ tbody td:first-child { text-align: left; }
   display: inline-block;
   flex-shrink: 0;
 }
+
+@media (max-width: 640px) {
+  .map-legend-overlay {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 10px;
+    gap: 10px 16px;
+  }
+}
+
 .tf-game-loss { background: #1a0f0f; }
