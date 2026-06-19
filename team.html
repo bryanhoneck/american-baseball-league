@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ABL — American Baseball League</title>
+  <title>ABL — Team</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Dancing+Script:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="promo.css" />
 </head>
 <body>
   <header>
@@ -38,8 +37,8 @@
     <nav class="page-nav">
       <a href="home.html">Home</a>
       <a href="news.html">League News</a>
-      <a href="team.html">Team</a>
-      <a href="index.html" class="active">Standings</a>
+      <a href="team.html" class="active">Team</a>
+      <a href="index.html">Standings</a>
       <a href="baseball-cup.html">Baseball Cup</a>
       <a href="championship.html">Championship</a>
     </nav>
@@ -47,11 +46,10 @@
       <button class="new-season-btn" onclick="sessionStorage.removeItem('abl_season_v3'); location.reload();">↺ New Season</button>
     </div>
   </header>
-  <main id="app"></main>
+  <main id="team-app"></main>
   <script src="data.js?v=5"></script>
   <script src="schedule.js?v=2"></script>
   <script src="season.js?v=4"></script>
-  <script src="promo.js?v=3"></script>
-  <script src="app.js?v=11"></script>
+  <script src="team.js?v=11"></script>
 </body>
 </html>
