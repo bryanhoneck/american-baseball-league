@@ -32,11 +32,21 @@ function getAllTeams() {
   return teams;
 }
 
+function simScore(rand, t1Wins) {
+  function runs(isWinner) { return Math.max(0, (isWinner ? 5 : 3) + Math.floor(rand() * 5) - 1); }
+  let winnerRuns = runs(true);
+  let loserRuns  = runs(false);
+  if (loserRuns >= winnerRuns) loserRuns = Math.max(0, winnerRuns - 1 - Math.floor(rand() * 2));
+  return t1Wins ? [winnerRuns, loserRuns] : [loserRuns, winnerRuns];
+}
+
 function simGame(t1, t2, t1IsHome) {
   const homeAdj = t1IsHome ? 0.04 : 0;
   const prob = Math.max(0.15, Math.min(0.85,
     0.5 + (effectivePct(t1) - effectivePct(t2)) + homeAdj));
-  return _champRand() < prob ? t1 : t2;
+  const t1Wins = _champRand() < prob;
+  const [t1Score, t2Score] = simScore(_champRand, t1Wins);
+  return { winner: t1Wins ? t1 : t2, t1Score, t2Score };
 }
 
 // Matches baseball-cup.js simulateGame exactly (no home adj, clamp 0.2–0.8)
@@ -122,11 +132,13 @@ function buildField(cupWinner) {
 function simSeries(hi, lo, bestOf, neutral = false) {
   const needed = Math.ceil(bestOf / 2);
   let hw = 0, lw = 0;
+  const games = [];
   while (hw < needed && lw < needed) {
-    const winner = simGame(hi, lo, !neutral);
+    const { winner, t1Score, t2Score } = simGame(hi, lo, !neutral);
     winner === hi ? hw++ : lw++;
+    games.push({ hiScore: t1Score, loScore: t2Score });
   }
-  return { winner: hw > lw ? hi : lo, hiWins: hw, loWins: lw };
+  return { winner: hw > lw ? hi : lo, hiWins: hw, loWins: lw, games };
 }
 
 const NEUTRAL_SITES = [
@@ -180,14 +192,18 @@ function teamRow(t, isWinner) {
 }
 
 function seriesCard(matchup, label, scoreLabel) {
-  const { hi, lo, winner, hiWins, loWins } = matchup;
+  const { hi, lo, winner, hiWins, loWins, games } = matchup;
   const hiWon = winner.abbr === hi.abbr;
+  const gamesHTML = games.map((g, i) =>
+    `<span class="b-game">${games.length > 1 ? `G${i+1} ` : ""}${g.hiScore}–${g.loScore}</span>`
+  ).join("");
   return `
     <div class="b-card">
       <div class="b-card-label">${label}</div>
       ${teamRow(hi, hiWon)}
       ${teamRow(lo, !hiWon)}
       ${scoreLabel ? `<div class="b-score">${hiWins}–${loWins} ${scoreLabel}</div>` : ""}
+      <div class="b-games">${gamesHTML}</div>
     </div>`;
 }
 

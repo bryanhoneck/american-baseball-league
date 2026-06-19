@@ -232,9 +232,8 @@ function renderPromoRel() {
 
       ${(function() {
         const allReserve = Object.values(ABL_RESERVE.regions).flat();
-        const callUp = allReserve.reduce((best, t) =>
-          (t.w / (t.w + t.l)) > (best.w / (best.w + best.l)) ? t : best
-        );
+        const callUpRand = window.ablSeededRand(window.ablSeed ^ 0xAE5E4111);
+        const callUp = allReserve[Math.floor(callUpRand() * allReserve.length)];
         return `
           <div class="pr-section">
             <div class="pr-section-title">Reserve League — Call Up</div>
@@ -245,9 +244,8 @@ function renderPromoRel() {
                   <span class="pr-div-badge" style="color:#a371f7">RES</span>
                   <span class="pr-abbr">${callUp.abbr}</span>
                   <span class="pr-name">${callUp.city} ${callUp.name}</span>
-                  <span class="pr-rec">${callUp.w}-${callUp.l} (${(callUp.w/(callUp.w+callUp.l)).toFixed(3).replace(/^0/,"")})</span>
                 </div>
-                <div class="pr-auto-label">Best record in the Reserve League</div>
+                <div class="pr-auto-label">Selected for call-up from the Reserve League</div>
               </div>
             </div>
           </div>`;

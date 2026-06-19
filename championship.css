@@ -88,6 +88,24 @@
   background: #0d1117;
 }
 
+.b-games {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px 8px;
+  background: #0d1117;
+  border-top: 1px solid #21262d;
+}
+
+.b-game {
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: #8b949e;
+  background: #1f2937;
+  border-radius: 3px;
+  padding: 2px 6px;
+}
+
 /* Final column extras */
 .bracket-final .b-card {
   border-color: #d29922;

@@ -88,7 +88,7 @@
 
 .matchup-row {
   display: grid;
-  grid-template-columns: 32px 30px 36px 1fr 44px 18px;
+  grid-template-columns: 32px 30px 36px 1fr 44px 30px 18px;
   align-items: center;
   padding: 5px 8px;
   gap: 4px;
@@ -137,6 +137,14 @@
   text-align: center;
   font-size: 0.75rem;
 }
+
+.mscore {
+  font-weight: 700;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #e6edf3;
+}
+.matchup-row.loser .mscore { color: #6e7681; font-weight: 600; }
 
 /* Winner banner */
 .winner-banner {
@@ -227,7 +235,7 @@
 
 .bv-team {
   display: grid;
-  grid-template-columns: 26px 34px 1fr 14px;
+  grid-template-columns: 26px 34px 1fr 20px 14px;
   align-items: center;
   padding: 5px 8px;
   gap: 3px;
@@ -240,6 +248,7 @@
 .bv-seed  { color: #8b949e; font-size: 0.65rem; }
 .bv-abbr  { font-weight: 700; color: #f0f6fc; font-size: 0.75rem; }
 .bv-name  { color: #8b949e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.68rem; }
+.bv-score { color: #e6edf3; font-weight: 700; font-size: 0.7rem; text-align: center; }
 .bv-check { color: #3fb950; font-size: 0.65rem; text-align: right; }
 
 .bv-champ-card {

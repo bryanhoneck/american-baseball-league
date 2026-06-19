@@ -20,9 +20,19 @@ function teamPct(t) { return t.w / (t.w + t.l); }
 const DIV_BONUS = { major: 0.06, supplemental: 0.02, minors1: -0.02, minors2: -0.06 };
 function effectivePct(t) { return teamPct(t) + (DIV_BONUS[t.division] || 0); }
 
+function simScore(rand, homeWin) {
+  function runs(isWinner) { return Math.max(0, (isWinner ? 5 : 3) + Math.floor(rand() * 5) - 1); }
+  let winnerRuns = runs(true);
+  let loserRuns  = runs(false);
+  if (loserRuns >= winnerRuns) loserRuns = Math.max(0, winnerRuns - 1 - Math.floor(rand() * 2));
+  return homeWin ? [winnerRuns, loserRuns] : [loserRuns, winnerRuns];
+}
+
 function simulateGame(home, away) {
   const prob = Math.max(0.2, Math.min(0.8, 0.5 + (effectivePct(home) - effectivePct(away))));
-  return _cupRand() < prob ? home : away;
+  const homeWin = _cupRand() < prob;
+  const [homeScore, awayScore] = simScore(_cupRand, homeWin);
+  return { winner: homeWin ? home : away, homeScore, awayScore };
 }
 
 function simulateCup() {
@@ -38,7 +48,7 @@ function simulateCup() {
   for (let i = 0; i < r1Pool.length / 2; i++) {
     const home = r1Pool[i];
     const away = r1Pool[r1Pool.length - 1 - i];
-    r1Matchups.push({ home, away, winner: simulateGame(home, away) });
+    r1Matchups.push({ home, away, ...simulateGame(home, away) });
   }
   rounds.push({ name: "Round 1", label: "R1", matchups: r1Matchups });
 
@@ -60,7 +70,7 @@ function simulateCup() {
     for (let i = 0; i < pool.length / 2; i++) {
       const home = pool[i];
       const away = pool[pool.length - 1 - i];
-      matchups.push({ home, away, winner: simulateGame(home, away) });
+      matchups.push({ home, away, ...simulateGame(home, away) });
     }
     rounds.push({ ...def, matchups });
     pool = matchups.map(m => m.winner).sort((a, b) => a.seed - b.seed);
@@ -96,6 +106,7 @@ function matchupCard(m, isFinal) {
         <span class="abbr">${m.home.abbr}</span>
         <span class="mname">${m.home.city} ${m.home.name}</span>
         <span class="mpct">${pctStr(m.home)}</span>
+        <span class="mscore">${m.homeScore}</span>
         ${hw ? '<span class="win-mark">✓</span>' : '<span class="win-mark"></span>'}
       </div>
       <div class="matchup-row${aw ? " winner" : " loser"}">
@@ -104,6 +115,7 @@ function matchupCard(m, isFinal) {
         <span class="abbr">${m.away.abbr}</span>
         <span class="mname">${m.away.city} ${m.away.name}</span>
         <span class="mpct">${pctStr(m.away)}</span>
+        <span class="mscore">${m.awayScore}</span>
         ${aw ? '<span class="win-mark">✓</span>' : '<span class="win-mark"></span>'}
       </div>
     </div>`;
@@ -161,12 +173,14 @@ function renderBracket() {
           <span class="bv-seed">#${m.home.seed}</span>
           <span class="bv-abbr">${m.home.abbr}</span>
           <span class="bv-name">${m.home.city} ${m.home.name}</span>
+          <span class="bv-score">${m.homeScore}</span>
           ${hw ? '<span class="bv-check">✓</span>' : '<span class="bv-check"></span>'}
         </div>
         <div class="bv-team ${!hw ? "bv-w" : "bv-l"}">
           <span class="bv-seed">#${m.away.seed}</span>
           <span class="bv-abbr">${m.away.abbr}</span>
           <span class="bv-name">${m.away.city} ${m.away.name}</span>
+          <span class="bv-score">${m.awayScore}</span>
           ${!hw ? '<span class="bv-check">✓</span>' : '<span class="bv-check"></span>'}
         </div>
       </div>`;
